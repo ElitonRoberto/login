@@ -37,43 +37,28 @@
             }
 
             if (filter_has_var(INPUT_GET, 'idDel')) {
-                $usuario = new Paciente();
+                $usuario = new Usuario();
                 $id = filter_input(INPUT_GET, 'idDel');
-                if ($paciente->deletar('idPac', $id)) {
-                    header("location:pacientes.php");
+                if ($usuario->deletar('idUsu', $id)) {
+                    header("location:Usuario.php");
                 }
             }
 
             if (filter_has_var(INPUT_POST, 'btnGravar')) {
-                $nomeArq = filter_input(INPUT_POST, 'nomeAntigo');
-                if (isset($_FILES['filFoto'])) {
-                    $ext = strtolower(pathinfo($_FILES['filFoto']['name'], PATHINFO_EXTENSION));
 
-                    if (empty($nomeArq)) {
-                        $nomeArq = md5(date("Y.m.d-H.i.s")) . $ext;
-                    }
-
-                    $local = "imagesPac/"; //pasta que sera salvo
-                    move_uploaded_file($_FILES['filFoto']['tmp_name'], $local . $nomeArq);
-                }
-
-
-                $paciente = new Paciente();
+                $usuario = new Usuario();
                 $id = filter_input(INPUT_POST, 'txtId');
-                $paciente->setIdPac($id);
-                $paciente->setNomePac(filter_input(INPUT_POST, 'txtNome'));
-                $paciente->setEnderecoPac(filter_input(INPUT_POST, 'txtEndereco'));
-                $paciente->setBairroPac(filter_input(INPUT_POST, 'txtBairro'));
-                $paciente->setCidadePac(filter_input(INPUT_POST, 'txtCidade'));
-                $paciente->setEstadoPac(filter_input(INPUT_POST, 'sltEstado'));
-                $paciente->setCepPac(filter_input(INPUT_POST, 'txtCep'));
-                $paciente->setNascimentoPac(filter_input(INPUT_POST, 'txtNascimento'));
-                $paciente->setEmailPac(filter_input(INPUT_POST, 'txtEmail'));
-                $paciente->setFotoPac($nomeArq);
+                $usuario->setIdPac($id);
+                $usuario->setNomeUsu(filter_input(INPUT_POST, 'txtNome'));
+                $usuario->setEmailUsu(filter_input(INPUT_POST, 'txtEmail'));
+                $usuario->setCelularUsu(filter_input(INPUT_POST, 'txtCelular'));
+                $usuario->setSenhaUsu(filter_input(INPUT_POST, 'txtSenha'));
+
+               
                 if (empty($id)) {
-                    $paciente->inserir();
+                    $usuario->inserir();
                 } else {
-                    $paciente->atualizar('idPac', $id);
+                    $usuario->atualizar('idPac', $id);
                 }
             }
             ?>
@@ -82,7 +67,7 @@
                 htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post"
                 enctype="multipart/form-data">
                 <input type="hidden" name="txtId"
-                    value="<?php echo isset($editPac->idPac) ? $editPac->idPac : null; ?>">
+                    value="<?php echo isset($editUsu->idUsu) ? $editUsu->idUsu : null; ?>">
 
                 <input type="hidden" name="nomeAntigo"
                     value="<?php echo isset($editPac->fotoPac) ? $editPac->fotoPac : null; ?>">
@@ -91,32 +76,31 @@
                 <div class="col-12">
                     <label for="txtNome" class="form-label">Nome</label>
                     <input type="text" class="form-control" id="txtNome" placeholder="Digite seu nome..." name="txtNome"
-                        value="<?php echo isset($editPac->nomePac) ? $editPac->nomePac : NULL; ?>">
+                        value="<?php echo isset($editUsu->nomeUsu) ? $editUsu->nomeUsu : NULL; ?>">
                 </div>
 
                 <div class="col-6">
                     <label for="txtEmail" class="form-label">E-mail</label>
                     <input type="email" class="form-control" id="txtEmail" placeholder="Digite seu email..."
-                        name="txtEmail" value="<?php echo isset($editPac->emailPac) ? $editPac->emailPac : NULL; ?>">
+                        name="txtEmail" value="<?php echo isset($editUsu->emailUsu) ? $editUsu->emailUsu : NULL; ?>">
                 </div>
 
                 <div class="col-md-6">
                     <label for="txtCelular" class="form-label">Celular</label>
-                    <input type="text" class="form-control" id="txtCelular" name="txtCelular"
-                        value="<?php echo isset($editPac->celularPac) ? $editPac->celularPac : NULL; ?>">
+                    <input type="text" class="form-control" id="txtCelular" placeholder="Digite seu celular..." name="txtCelular"
+                        value="<?php echo isset($editUsu->celularUsu) ? $editUsu->celularUsu : NULL; ?>">
                 </div>
 
                 <div class="col-md-6">
-                    <label for="txtCidade" class="form-label">Senha</label>
-                    <input type="text" class="form-control" id="txtCidade" placeholder="Digite sua cidade..."
-                        name="txtCidade" value="<?php echo isset($editPac->cidadePac) ? $editPac->cidadePac : NULL; ?>">
+                    <label for="txtSenha" class="form-label">Senha</label>
+                    <input type="text" class="form-control" id="txtSenha" name="txtSenha" value="<?php echo isset($editUsu->senhaUsu) ? $editUsu->senhaUsu : NULL; ?>">
                 </div>
 
 
                 <div class="col-md-6">
-                    <label for="txtCep" class="form-label">Confirme a senha</label>
-                    <input type="text" class="form-control" id="txtCep" name="txtCep"
-                        value="<?php echo isset($editPac->cepPac) ? $editPac->cepPac : NULL; ?>">
+                    <label for="txtSenhaConf" class="form-label">Confirme sua senha</label>
+                    <input type="text" class="form-control" id="txtSenhaConf" name="txtSenhaConf"
+                        value="<?php echo isset($editUsu->senhaUsu) ? $editUsu->senhaUsu : NULL; ?>">
                 </div>                
                 
                 <div class="col-12">
