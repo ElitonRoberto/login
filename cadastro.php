@@ -12,15 +12,7 @@
 
 <body>
     <header>
-        <h1>Cadastro</h1>
-        <nav class="nav">
-            <!--Ta feio esse menu, vou modificar posteriormente-->
-            <a class="nav-link" href="#">Clinica</a>
-            <a class="nav-link" href="medicos.php">Médicos</a>
-            <a class="nav-link" href="especialidades.php">Especialidades</a>
-            <a class="nav-link" href="consultas.php">Consultas</a>
-            <a class="nav-link" href="pacientes.php">Pacientes</a>
-        </nav>
+        <h1 class="text-center">Cadastro</h1>
     </header>
 
     <main>
@@ -58,7 +50,7 @@
                 if (empty($id)) {
                     $usuario->inserir();
                 } else {
-                    $usuario->atualizar('idPac', $id);
+                    $usuario->atualizar('idUsu', $id);
                 }
             }
             ?>
@@ -74,35 +66,17 @@
 
 
                 <div class="col-12">
-                    <label for="txtNome" class="form-label">Nome</label>
+                    <label for="txtNome" class="form-label">Usuário</label>
                     <input type="text" class="form-control" id="txtNome" placeholder="Digite seu nome..." name="txtNome"
                         value="<?php echo isset($editUsu->nomeUsu) ? $editUsu->nomeUsu : NULL; ?>">
                 </div>
 
-                <div class="col-6">
-                    <label for="txtEmail" class="form-label">E-mail</label>
-                    <input type="email" class="form-control" id="txtEmail" placeholder="Digite seu email..."
+                <div class="col-12">
+                    <label for="txtEmail" class="form-label">Senha</label>
+                    <input type="email" class="form-control" id="txtEmail" placeholder="Digite sua senha..."
                         name="txtEmail" value="<?php echo isset($editUsu->emailUsu) ? $editUsu->emailUsu : NULL; ?>">
                 </div>
 
-                <div class="col-md-6">
-                    <label for="txtCelular" class="form-label">Celular</label>
-                    <input type="text" class="form-control" id="txtCelular" placeholder="Digite seu celular..." name="txtCelular"
-                        value="<?php echo isset($editUsu->celularUsu) ? $editUsu->celularUsu : NULL; ?>">
-                </div>
-
-                <div class="col-md-6">
-                    <label for="txtSenha" class="form-label">Senha</label>
-                    <input type="text" class="form-control" id="txtSenha" name="txtSenha" value="<?php echo isset($editUsu->senhaUsu) ? $editUsu->senhaUsu : NULL; ?>">
-                </div>
-
-
-                <div class="col-md-6">
-                    <label for="txtSenhaConf" class="form-label">Confirme sua senha</label>
-                    <input type="text" class="form-control" id="txtSenhaConf" name="txtSenhaConf"
-                        value="<?php echo isset($editUsu->senhaUsu) ? $editUsu->senhaUsu : NULL; ?>">
-                </div>                
-                
                 <div class="col-12">
                     <button type="submit" class="btn btn-primary" name="btnGravar">Cadastrar</button>
                 </div>
